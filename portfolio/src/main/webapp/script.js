@@ -37,6 +37,7 @@ window.onload = function() {
             txtRotate(elements[i], JSON.parse(text), parseInt(time), 0, true);
         } 
     }
+    projectSlideNo = 0;
 }
 
 function txtRotate(elem, text, time, index, isAscending) {
@@ -60,4 +61,16 @@ function txtRotate(elem, text, time, index, isAscending) {
     }
     // Else continue on to type/backspace next word
     setTimeout(txtRotate, 150, elem, text, time, index, isAscending);
+}
+
+var projectSlideNo;
+function moveProject(i) {
+    // Move forward or backward through the different projects, depending on if i is 1 or -1
+    var elements = document.getElementsByClassName('project');
+    elements[projectSlideNo].style.display = "none";
+    if (projectSlideNo == 0 && i < 0) {
+        projectSlideNo = elements.length - 1;
+    }
+    else projectSlideNo = (projectSlideNo + i) % elements.length;
+    elements[projectSlideNo].style.display = "block";
 }
