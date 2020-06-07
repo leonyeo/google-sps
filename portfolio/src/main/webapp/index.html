@@ -1,18 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Leon's Portfolio</title>
+        <link rel="stylesheet" href="style.css">
+        <script defer src="script.js"></script>
+    </head>
+    <body>
+        <div id="body">
+            <div id="top-nav-bar">
+                <a href="https://github.com/leonyeo">GitHub <img class="icon" src="images/github.png" /></a>
+                <a href="https://www.linkedin.com/in/leon-yeo-0368a2166/">LinkedIn <img src="images/linkedin.png" /></a>
+                <a href="gallery.html">Gallery</a>
+                <a class="selected" href="index.html">Home</a>
+            </div>
+            <div id="header">
+                <div class="flex">
+                    <div class="grid-row padding-50">
+                        <div class="float-right align-center">
+                            <h5>Hey there, I'm</h5>
+                            <h1>Leon Yeo Lai Xiang</h1>
+                            <h3>I'm a <span class="txt-rotate" data-time="2000" data-text='["Student.", "Developer.", "Traveller."]' /></h3>
+                        </div>
+                    </div>
+                    <div class="grid-row align-left padding-50">
+                        <a href="images/profile-pic.jpg"><img class="profile-pic" src="images/profile-pic.jpg" /></a>
+                    </div>
+                </div>
+            </div>
+            <div id="content">
+            <h3>About me</h3>
+            <p>Hello there! I am Leon and I am a Year 4 Business and Computing(BCG) student at NTU! I first developed 
+                an interest in programming in computing class during secondary school. I was really enjoyed the 
+                problem solving nature of programming, and was fascinated by how I could create something complex 
+                from simple building blocks. Over the past 3 years, I have built a strong foundation in computer 
+                science principles, and picked up various different skills through internships, hackathons and 
+                various personal projects. Currently, I am specialising in Artificial Inteligence and Data Analytics.</p>
+            <p>In my free time, I enjoy gaming, playing a variety of games, from building games like 
+                <a href="https://store.steampowered.com/app/427520/Factorio/">Factorio</a> to FPS games like 
+                <a href="https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/">CS:GO</a>. When time and 
+                finances permit, I enjoy travelling as well!</p>
+            <p>This is a portfolio page built during the course of the Google Software Product Sprint program!</p>
+            <p>Click here to get a random message:</p>
+            <h3>Projects</h3>
+            <p>Below are some of the projects that I have worked on!</p>
+            <div id="projects-container">
+                <div class="project" style="display: block;">
+                    <h5>REDACTED - Autonomous Maze Explorer</h5>
+                    <p>REDACTED is a robotic system capable of autonomously exploring and traversing an unknown maze. 
+                        The robot is able to find the position of all obstacles, determine the fastest path from START to END, 
+                        as well as perform image recognition of signs in the maze. In addition, the robot can be controlled 
+                        wirelessly through an Android app.</p>
+                </div>
+                <div class="project" style="display: none;">
+                    <h5>ParkLah - Driver's Mobile Assistant</h5>
+                    <p>ParkLah is a one-stop mobile application that aims to help regular, everyday drivers solve everyday 
+                        challenges that they might face when driving. By providing clear, relevant information about amenities 
+                        in and around the intended destination, the driver may make informed decisions on their commutes. 
+                        Drivers are also able to request help and guidance in the event of emergencies on the road.</p>
+                </div>
+                <a id="prev" onclick="moveProject(-1)">&lt</a>
+                <a id="next" onclick="moveProject(1)">&gt</a>
+            </div>
+            <button onclick="addRandomGreeting()">Hello</button>
+            <div id="greeting-container"></div>
+            </div>
+        </div>
+    </body>
 </html>

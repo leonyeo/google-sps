@@ -1,9 +1,119 @@
+body{
+    background-image: url("images/background.jpg")
+}
+h1 {
+    font-size: 45px;
+}
+h3 {
+    font-size: 30px;
+}
+h5 {
+    font-size: 20px;
+}
+p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+}
+
+#body {
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+#top-nav-bar {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+#top-nav-bar a {
+    color: darkslategray;
+    font: Helvetica;
+    font-size: 20px;
+    text-decoration: none;
+    float: right;
+    padding-right: 20px;
+}
+#top-nav-bar a:hover {
+    text-decoration: underline;
+    text-decoration-color: darkslateblue;
+}
+#top-nav-bar a.selected {
+    text-decoration: underline;
+    text-decoration-color: darkslateblue;
+}
+#top-nav-bar img {
+    max-width: 18px;
+    max-height: 18px;
+    padding-left: 2px;
+}
+#header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 #content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  width: 800px;
 }
-
 #greeting-container {
   margin-top: 20px;
+}
+#projects-container {
+    position: relative;
+    border: 2px solid black;
+    padding: 10px;
+}
+#projects-container .project {
+    text-align: center;
+    padding: 20px;
+}
+#projects-container #prev {
+    position: absolute;
+    top: 50%;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+#projects-container #next {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.txt-rotate {
+    color: rgba(42, 42, 255, 0.904);
+    border-right: 2px solid darkslategray;
+    text-decoration: underline;
+}
+.grid-row {
+    flex: 1;
+}
+.profile-pic {
+    max-height: 300px;
+}
+.align-left {
+    text-align: left;
+}
+.align-right {
+    text-align: right;
+}
+.align-center {
+    text-align: center;
+}
+.float-right {
+    float: right;
+}
+.float-left {
+    float: left;
+}
+.padding-50 {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.flex {
+    display: flex;
 }
