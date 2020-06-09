@@ -83,6 +83,16 @@ p {
     font-size: 20px;
     cursor: pointer;
 }
+#comments-container {
+    padding: 10px;
+    border: 1px solid grey;
+}
+#comments-container .comment h5{
+    margin: 0px;
+}
+#comments-container .comment p{
+    margin: 0px;
+}
 
 .txt-rotate {
     color: rgba(42, 42, 255, 0.904);

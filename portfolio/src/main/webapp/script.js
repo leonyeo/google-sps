@@ -38,7 +38,8 @@ window.onload = function() {
         } 
     }
     projectSlideNo = 0;
-    fetchData();
+    // Get all comments
+    fetchComments();
 }
 
 function txtRotate(elem, text, time, index, isAscending) {
@@ -76,15 +77,23 @@ function moveProject(i) {
     elements[projectSlideNo].style.display = "block";
 }
 
-function fetchData() {
-    fetch('/data').then((response) => {
+function fetchComments() {
+    fetch('/comment').then((response) => {
         response.json().then((comments) => {
             elem = document.getElementById('comments-container');
             for(var i=0; i < comments.length; i++) {
-                const liElement = document.createElement('li');
-                liElement.innerText = comments[i];
-                elem.appendChild(liElement);
+                const commentElem = createCommentElement(comments[i]);
+                elem.appendChild(commentElem);
             }
         })
     })
+}
+
+function createCommentElement(comment) {
+    // Function to create a single comment element
+    const commentElem = document.createElement("div");
+    commentElem.className = "comment";
+    commentElem.innerHTML = "<hr /><h5>" + comment.name + "</h5><p>" + comment.postTime + 
+                            "</p><br /><p>" + comment.text + "</p>";
+    return commentElem;
 }
