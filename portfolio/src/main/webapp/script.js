@@ -93,7 +93,7 @@ function createCommentElement(comment) {
     // Function to create a single comment element
     const commentElem = document.createElement("div");
     commentElem.className = "comment";
-    commentElem.innerHTML = "<hr /><h5>" + comment.name + "</h5><p>" + comment.postTime + 
+    commentElem.innerHTML = "<hr /><h5>" + comment.name + "</h5><p>" + comment.timestamp + 
                             "</p><br /><p>" + comment.text + "</p>";
     return commentElem;
 }
