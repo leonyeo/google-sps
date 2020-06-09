@@ -38,6 +38,7 @@ window.onload = function() {
         } 
     }
     projectSlideNo = 0;
+    fetchData();
 }
 
 function txtRotate(elem, text, time, index, isAscending) {
@@ -76,10 +77,14 @@ function moveProject(i) {
 }
 
 function fetchData() {
-    fetch('data').then((response) => {
-        response.text().then((text) => {
-            elem = document.getElementById('greeting-container');
-            elem.innerHTML = text;
+    fetch('/data').then((response) => {
+        response.json().then((comments) => {
+            elem = document.getElementById('comments-container');
+            for(var i=0; i < comments.length; i++) {
+                const liElement = document.createElement('li');
+                liElement.innerText = comments[i];
+                elem.appendChild(liElement);
+            }
         })
     })
 }
