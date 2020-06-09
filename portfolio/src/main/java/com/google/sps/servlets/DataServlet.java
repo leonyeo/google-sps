@@ -15,8 +15,12 @@
 package com.google.sps.servlets;
 
 import com.google.sps.data.Comment;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.Date;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,11 +31,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
 
-    private ArrayList<Comment> comments;
+    DatastoreService comments;
 
     @Override
     public void init() {
-        this.comments = new ArrayList<Comment>();
+        this.comments = DatastoreServiceFactory.getDatastoreService();
     }
 
     @Override
@@ -45,7 +49,12 @@ public class DataServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String text = request.getParameter("text");
-        this.comments.add(new Comment(name, text));
+
+        Entity commentEntity = new Entity("Comment");
+        commentEntity.setProperty("name", name);
+        commentEntity.setProperty("timestamp", new Date());
+        commentEntity.setProperty("text", text);
+        this.comments.put(commentEntity);
         response.sendRedirect("/");
     }
 }

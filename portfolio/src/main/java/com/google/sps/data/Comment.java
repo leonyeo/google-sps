@@ -19,12 +19,12 @@ import java.util.Date;
 // Class containing comment data
 public final class Comment {
     private final String name;
-    private final Date postTime;
+    private final Date timestamp;
     private final String text;
 
-    public Comment(String name, String text) {
+    public Comment(String name, Date timestamp, String text) {
         this.name = name;
-        this.postTime = new Date();
+        this.timestamp = timestamp;
         this.text = text;
     }
 
@@ -32,8 +32,8 @@ public final class Comment {
         return this.name;
     }
 
-    public Date getPostTime() {
-        return this.postTime;
+    public Date getTimestamp() {
+        return this.timestamp;
     }
 
     public String getText() {
