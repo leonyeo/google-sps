@@ -74,3 +74,12 @@ function moveProject(i) {
     else projectSlideNo = (projectSlideNo + i) % elements.length;
     elements[projectSlideNo].style.display = "block";
 }
+
+function fetchData() {
+    fetch('data').then((response) => {
+        response.text().then((text) => {
+            elem = document.getElementById('greeting-container');
+            elem.innerHTML = text;
+        })
+    })
+}
