@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/comment")
+@WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
     DatastoreService datastore;
@@ -56,7 +56,7 @@ public class DataServlet extends HttpServlet {
             Date timestamp = (Date) entity.getProperty("timestamp");
             String text = (String) entity.getProperty("text");
 
-            Comment newComment = new Comment(name, timestamp, text);
+            Comment newComment = new Comment(id, name, timestamp, text);
             comments.add(newComment);
         }
         

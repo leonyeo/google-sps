@@ -18,14 +18,20 @@ import java.util.Date;
 
 // Class containing comment data
 public final class Comment {
+    private final long id;
     private final String name;
     private final Date timestamp;
     private final String text;
 
-    public Comment(String name, Date timestamp, String text) {
+    public Comment(long id, String name, Date timestamp, String text) {
+        this.id = id;
         this.name = name;
         this.timestamp = timestamp;
         this.text = text;
+    }
+
+    public long getId() {
+        return this.id;
     }
 
     public String getName() {

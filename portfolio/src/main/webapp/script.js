@@ -78,7 +78,7 @@ function moveProject(i) {
 }
 
 function fetchComments() {
-    fetch('/comment').then((response) => {
+    fetch('/comments').then((response) => {
         response.json().then((comments) => {
             elem = document.getElementById('comments-container');
             for(var i=0; i < comments.length; i++) {
