@@ -41,7 +41,6 @@
                 <a href="https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/">CS:GO</a>. When time and 
                 finances permit, I enjoy travelling as well!</p>
             <p>This is a portfolio page built during the course of the Google Software Product Sprint program!</p>
-            <p>Click here to get a random message:</p>
             <h3>Projects</h3>
             <p>Below are some of the projects that I have worked on!</p>
             <div id="projects-container">
@@ -62,8 +61,21 @@
                 <a id="prev" onclick="moveProject(-1)">&lt</a>
                 <a id="next" onclick="moveProject(1)">&gt</a>
             </div>
+            <p>Click here to get a random message:</p>
             <button onclick="addRandomGreeting()">Hello</button>
             <div id="greeting-container"></div>
+            <hr />
+            <div id="comments-container">
+                <br />
+                <form action="/comments" method="POST">
+                    <label for="comment-name">Name: </label>
+                    <input type="text" id="comment-name" name="name" required />
+                    <br /><br />
+                    <textarea type="text" id="comment-text" name="text" placeholder="Type comment here" rows="4" cols="100" required ></textarea>
+                    <br /><br />
+                    <input type="submit" />
+                </form>
+            </div>
             </div>
         </div>
     </body>

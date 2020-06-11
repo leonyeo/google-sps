@@ -38,6 +38,8 @@ window.onload = function() {
         } 
     }
     projectSlideNo = 0;
+    // Get all comments
+    fetchComments();
 }
 
 function txtRotate(elem, text, time, index, isAscending) {
@@ -73,4 +75,25 @@ function moveProject(i) {
     }
     else projectSlideNo = (projectSlideNo + i) % elements.length;
     elements[projectSlideNo].style.display = "block";
+}
+
+function fetchComments() {
+    fetch('/comments').then((response) => {
+        response.json().then((comments) => {
+            elem = document.getElementById('comments-container');
+            for(var i=0; i < comments.length; i++) {
+                const commentElem = createCommentElement(comments[i]);
+                elem.appendChild(commentElem);
+            }
+        })
+    })
+}
+
+function createCommentElement(comment) {
+    // Function to create a single comment element
+    const commentElem = document.createElement("div");
+    commentElem.className = "comment";
+    commentElem.innerHTML = "<hr /><h5>" + comment.name + "</h5><p>" + comment.timestamp + 
+                            "</p><br /><p>" + comment.text + "</p>";
+    return commentElem;
 }
