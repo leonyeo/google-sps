@@ -79,12 +79,17 @@ function moveProject(i) {
 
 function fetchComments() {
     fetch('/comments').then((response) => {
-        response.json().then((comments) => {
+        response.json().then((payload) => {
+            const comments = payload.commentsList;
+            const uploadUrl = payload.uploadUrl;
+
             elem = document.getElementById('comments-container');
             for(var i=0; i < comments.length; i++) {
                 const commentElem = createCommentElement(comments[i]);
                 elem.appendChild(commentElem);
             }
+
+            document.getElementById('comments-form').action = uploadUrl;
         })
     })
 }
@@ -95,5 +100,8 @@ function createCommentElement(comment) {
     commentElem.className = "comment";
     commentElem.innerHTML = "<hr /><h5>" + comment.name + "</h5><p>" + comment.timestamp + 
                             "</p><br /><p>" + comment.text + "</p>";
+    if (comment.imageUrl) {
+        commentElem.innerHTML += "<img src=\"" + comment.imageUrl + "\" />";
+    }
     return commentElem;
 }

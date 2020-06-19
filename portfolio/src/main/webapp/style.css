@@ -87,11 +87,15 @@ p {
     padding: 10px;
     border: 1px solid grey;
 }
-#comments-container .comment h5{
+#comments-container .comment h5 {
     margin: 0px;
 }
-#comments-container .comment p{
+#comments-container .comment p {
     margin: 0px;
+}
+#comments-container img {
+    max-width: 150px;
+    max-height: 150px;
 }
 
 .txt-rotate {

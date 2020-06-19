@@ -67,11 +67,14 @@
             <hr />
             <div id="comments-container">
                 <br />
-                <form action="/comments" method="POST">
+                <form id="comments-form" method="POST" enctype="multipart/form-data">
                     <label for="comment-name">Name: </label>
                     <input type="text" id="comment-name" name="name" required />
                     <br /><br />
                     <textarea type="text" id="comment-text" name="text" placeholder="Type comment here" rows="4" cols="100" required ></textarea>
+                    <br /><br />
+                    <label for="comment-image">Upload an image: </label>
+                    <input type="file" id="comment-image" name="image" />
                     <br /><br />
                     <input type="submit" />
                 </form>
