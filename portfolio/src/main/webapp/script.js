@@ -79,16 +79,17 @@ function moveProject(i) {
 
 function fetchComments() {
     fetch('/comments').then((response) => {
-        response.json().then((payload) => {
-            const comments = payload.commentsList;
-            const uploadUrl = payload.uploadUrl;
-
+        response.json().then((comments) => {
             elem = document.getElementById('comments-container');
             for(var i=0; i < comments.length; i++) {
                 const commentElem = createCommentElement(comments[i]);
                 elem.appendChild(commentElem);
             }
-
+        })
+    })
+    fetch('/blobstore').then((response) => {
+        response.json().then((uploadUrl) => {
+            console.log(uploadUrl)
             document.getElementById('comments-form').action = uploadUrl;
         })
     })
