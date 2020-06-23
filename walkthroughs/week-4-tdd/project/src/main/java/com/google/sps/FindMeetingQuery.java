@@ -15,9 +15,48 @@
 package com.google.sps;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public final class FindMeetingQuery {
-  public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
-  }
+    public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
+        Collection<TimeRange> availableTimeRange = new ArrayList<TimeRange>();
+        
+        if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
+            return availableTimeRange;
+        }
+        availableTimeRange.add(TimeRange.WHOLE_DAY);
+
+        Collection<String> meetingAttendees = request.getAttendees();
+        for (Event e : events) {
+            Collection<String> eventAttendees = e.getAttendees();
+            if (hasCommonAttendee (meetingAttendees, eventAttendees)) {
+                TimeRange eventTime = e.getWhen();
+                for (TimeRange t: new ArrayList<TimeRange>(availableTimeRange)) {
+                    if (t.overlaps(eventTime)) {
+                        if (t.contains(eventTime.start())) {
+                            TimeRange newTimeslot = TimeRange.fromStartEnd(t.start(), eventTime.start(), false);
+                            if (newTimeslot.duration() >= request.getDuration()) {
+                                availableTimeRange.add(newTimeslot);
+                            }
+                        }
+                        if (t.contains(eventTime.end())) {
+                            TimeRange newTimeslot = TimeRange.fromStartEnd(eventTime.end(), t.end(), false);
+                            if (newTimeslot.duration() >= request.getDuration()) {
+                                availableTimeRange.add(newTimeslot);
+                            }
+                        }
+                        availableTimeRange.remove(t);
+                    }
+                }
+            }
+        }
+
+        return availableTimeRange;
+    }
+
+    private boolean hasCommonAttendee(Collection<String> meetingAttendees, Collection<String> eventAttendees) {
+        return !Collections.disjoint(meetingAttendees, eventAttendees);
+    }
 }
