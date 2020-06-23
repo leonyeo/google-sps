@@ -22,12 +22,14 @@ public final class Comment {
     private final String name;
     private final Date timestamp;
     private final String text;
+    private final String imageUrl;
 
-    public Comment(long id, String name, Date timestamp, String text) {
+    public Comment(long id, String name, Date timestamp, String text, String imageUrl) {
         this.id = id;
         this.name = name;
         this.timestamp = timestamp;
         this.text = text;
+        this.imageUrl = imageUrl;
     }
 
     public long getId() {
@@ -44,5 +46,9 @@ public final class Comment {
 
     public String getText() {
         return this.text;
+    }
+
+    public String getImageUrl() {
+        return this.imageUrl;
     }
 }

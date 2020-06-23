@@ -87,13 +87,22 @@ function fetchComments() {
             }
         })
     })
+    fetch('/comments-image-upload-url').then((response) => {
+        response.json().then((uploadUrl) => {
+            console.log(uploadUrl)
+            document.getElementById('comments-form').action = uploadUrl;
+        })
+    })
 }
 
 function createCommentElement(comment) {
     // Function to create a single comment element
     const commentElem = document.createElement("div");
     commentElem.className = "comment";
-    commentElem.innerHTML = "<hr /><h5>" + comment.name + "</h5><p>" + comment.timestamp + 
+    commentElem.innerHTML = "<hr /><h5>" + comment.name + "</h5><p>" + Date(comment.timestamp).toString() + 
                             "</p><br /><p>" + comment.text + "</p>";
+    if (comment.imageUrl) {
+        commentElem.innerHTML += "<img src=\"" + comment.imageUrl + "\" />";
+    }
     return commentElem;
 }
