@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet to get blobstore url for comment image upload **/
-@WebServlet("/commentsImageUrl")
+@WebServlet("/comments-image-upload-url")
 public class CommentImageUrlServlet extends HttpServlet {
 
     BlobstoreService blobstore;

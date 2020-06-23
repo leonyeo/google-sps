@@ -87,7 +87,7 @@ function fetchComments() {
             }
         })
     })
-    fetch('/commentsImageUrl').then((response) => {
+    fetch('/comments-image-upload-url').then((response) => {
         response.json().then((uploadUrl) => {
             console.log(uploadUrl)
             document.getElementById('comments-form').action = uploadUrl;
