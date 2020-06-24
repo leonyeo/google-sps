@@ -21,42 +21,59 @@ import java.util.Iterator;
 
 public final class FindMeetingQuery {
     public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-        Collection<TimeRange> availableTimeRange = new ArrayList<TimeRange>();
-        
-        if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
-            return availableTimeRange;
+        if (isMeetingRequestTooLong(request)) {
+            return Collections.emptyList();
         }
+
+        Collection<TimeRange> availableTimeRange = new ArrayList<TimeRange>();
         availableTimeRange.add(TimeRange.WHOLE_DAY);
 
         Collection<String> meetingAttendees = request.getAttendees();
         for (Event e : events) {
             Collection<String> eventAttendees = e.getAttendees();
-            if (hasCommonAttendee (meetingAttendees, eventAttendees)) {
+            if (hasCommonAttendees (meetingAttendees, eventAttendees)) {
                 TimeRange eventTime = e.getWhen();
-                for (TimeRange t: new ArrayList<TimeRange>(availableTimeRange)) {
-                    if (t.overlaps(eventTime)) {
-                        if (t.contains(eventTime.start())) {
-                            TimeRange newTimeslot = TimeRange.fromStartEnd(t.start(), eventTime.start(), false);
-                            if (newTimeslot.duration() >= request.getDuration()) {
-                                availableTimeRange.add(newTimeslot);
-                            }
-                        }
-                        if (t.contains(eventTime.end())) {
-                            TimeRange newTimeslot = TimeRange.fromStartEnd(eventTime.end(), t.end(), false);
-                            if (newTimeslot.duration() >= request.getDuration()) {
-                                availableTimeRange.add(newTimeslot);
-                            }
-                        }
-                        availableTimeRange.remove(t);
-                    }
-                }
+                updateAvailableTimeRange(availableTimeRange, eventTime, request.getDuration());                
             }
         }
 
         return availableTimeRange;
     }
 
-    private boolean hasCommonAttendee(Collection<String> meetingAttendees, Collection<String> eventAttendees) {
+    private boolean hasCommonAttendees(Collection<String> meetingAttendees, Collection<String> eventAttendees) {
         return !Collections.disjoint(meetingAttendees, eventAttendees);
+    }
+
+    private boolean isMeetingRequestTooLong(MeetingRequest request) {
+        return request.getDuration() > TimeRange.WHOLE_DAY.duration();
+    }
+
+    private boolean isTimeslotLongEnough(TimeRange timeslot, long meetingDuration) {
+        return timeslot.duration() >= meetingDuration;
+    }
+
+    private void updateAvailableTimeRange(Collection<TimeRange> availableTimeRange, TimeRange eventTime, long meetingDuration) {
+        for (TimeRange t: new ArrayList<TimeRange>(availableTimeRange)) {
+            if (t.overlaps(eventTime)) {
+                Collection<TimeRange> newTimeslots = splitTimeslot(t, eventTime);
+
+                availableTimeRange.remove(t);
+
+                for (TimeRange newTimeslot : newTimeslots) {
+                    if (isTimeslotLongEnough (newTimeslot, meetingDuration)) {
+                        availableTimeRange.add(newTimeslot);
+                    }
+                }
+            }
+        }
+    }
+
+    private Collection<TimeRange> splitTimeslot(TimeRange availableTimeslot, TimeRange eventTime) {
+        Collection<TimeRange> newTimeslots = new ArrayList<TimeRange>();
+
+        newTimeslots.add(TimeRange.fromStartEnd(availableTimeslot.start(), eventTime.start(), false));
+        newTimeslots.add(TimeRange.fromStartEnd(eventTime.end(), availableTimeslot.end(), false));
+
+        return newTimeslots;
     }
 }
