@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Arrays;
 
 public final class FindMeetingQuery {
     public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
@@ -71,9 +72,9 @@ public final class FindMeetingQuery {
     private Collection<TimeRange> splitTimeslot(TimeRange availableTimeslot, TimeRange eventTime) {
         Collection<TimeRange> newTimeslots = new ArrayList<TimeRange>();
 
-        newTimeslots.add(TimeRange.fromStartEnd(availableTimeslot.start(), eventTime.start(), false));
-        newTimeslots.add(TimeRange.fromStartEnd(eventTime.end(), availableTimeslot.end(), false));
-
-        return newTimeslots;
+        return Arrays.asList(
+            TimeRange.fromStartEnd(availableTimeslot.start(), eventTime.start(), false),
+            TimeRange.fromStartEnd(eventTime.end(), availableTimeslot.end(), false)
+        );
     }
 }
