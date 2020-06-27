@@ -70,8 +70,6 @@ public final class FindMeetingQuery {
     }
 
     private Collection<TimeRange> splitTimeslot(TimeRange availableTimeslot, TimeRange eventTime) {
-        Collection<TimeRange> newTimeslots = new ArrayList<TimeRange>();
-
         return Arrays.asList(
             TimeRange.fromStartEnd(availableTimeslot.start(), eventTime.start(), false),
             TimeRange.fromStartEnd(eventTime.end(), availableTimeslot.end(), false)
